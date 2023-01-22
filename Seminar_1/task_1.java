@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class task_1 {
     public static void main(String[] args) {
-        Scanner iScanner = new Scanner(System.in);
+        Scanner iScanner = new Scanner(System.in, "cp866");
         System.out.printf("Введите Ваше имя: ");
         String name = iScanner.nextLine();
         System.out.printf("Привет, %s!", name);
