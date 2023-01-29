@@ -82,8 +82,6 @@ public class hometask_3 {
                 System.exit(1);
         }
 
-        
-
         System.out.printf("Результат вычисления: %.2f", math_result);
         logger.info("Результат: " + math_result);
     }
