@@ -4,7 +4,6 @@ package Seminar_4;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Random;
 
 public class task_0 {
     public static void main(String[] args) {
