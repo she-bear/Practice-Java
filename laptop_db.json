@@ -1,0 +1,9 @@
+{   
+    "name": "Laptops",
+    "laptops": [
+        {"id": 1, "brand": "LENOVO", "model": "V14-ADA", "RAM": 8, "SSD": 256, "color": "серый", "system": "Windows 10 Professional", "price": 31990},
+        {"id": 2, "brand": "LENOVO", "model": "15ITL6", "RAM": 12, "SSD": 256, "color": "черный", "system": null, "price": 60990},
+        {"id": 3, "brand": "LENOVO", "model": "15ACH6", "RAM": 32, "SSD": 512, "color": "черный", "system": "Linux", "price": 84990},
+        {"id": 4, "brand": "ACER", "model": "A315-56-50Z5", "RAM": 8, "SSD": 256, "color": "черный", "system": "Eshell", "price": 49990}
+    ]
+}
