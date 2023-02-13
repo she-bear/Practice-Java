@@ -1,6 +1,7 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "c:\\Users\\olga\\YandexDisk\\GeekBrains\\09 Знакомство с Java\\Урок 2\\json-simple-1.1.1.jar"
+        "c:\\Users\\olga\\YandexDisk\\GeekBrains\\09 Знакомство с Java\\Урок 2\\json-simple-1.1.1.jar",
+        "e:\\YandexDisk\\GeekBrains\\09 Знакомство с Java\\Урок 2\\json-simple-1.1.1.jar"
     ]
 }
