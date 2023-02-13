@@ -5,12 +5,17 @@ import org.json.simple.parser.*;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class hometask_1 {
+    
+    static HashSet<laptop> laptopSet = new HashSet<laptop>();
+    
     public static void main(String[] args) throws ParseException, IOException {
         JSONParser parser = new JSONParser();
 
@@ -22,12 +27,19 @@ public class hometask_1 {
 
         JSONArray laptopsJsonArray = (JSONArray) rootJsonObject.get("laptops");
 
-        HashSet<laptop> laptopSet = new HashSet<laptop>();
+        // HashSet<laptop> laptopSet = new HashSet<laptop>();
 
         for(Object it: laptopsJsonArray) {
             JSONObject laptopJsonObject = (JSONObject) it;
 
-            laptop laptop_item = new laptop((int) (long) laptopJsonObject.get("id"), (String) laptopJsonObject.get("brand"));
+            laptop laptop_item = new laptop((int) (long) laptopJsonObject.get("id"), 
+                                            (String) laptopJsonObject.get("brand"),
+                                            (String) laptopJsonObject.get("model"),
+                                            (int) (long) laptopJsonObject.get("RAM"),
+                                            (int) (long) laptopJsonObject.get("SSD"),
+                                            (String) laptopJsonObject.get("color"),
+                                            (String) laptopJsonObject.get("system"),
+                                            (int) (long) laptopJsonObject.get("price"));
             laptopSet.add(laptop_item);
         }
 
@@ -35,21 +47,109 @@ public class hometask_1 {
         
         System.out.print("Добро пожаловать в каталог ноутбуков! Выберите действие:");
 
-        int userInput = 100;
+        int userInput = 200;
         while (userInput != 0) {
             System.out.println("""
                 \n1 - печать всех товаров
                 2 - поиск по каталогу
                 0 - выход""");
-                System.out.print("Ваш выбор: ");
+            System.out.print("Ваш выбор: ");
+            
+            
+            // userInput = iScanner.nextInt();
+            if (iScanner.hasNextInt()) {
                 userInput = iScanner.nextInt();
-
-            switch (userInput) {
-                case 1:
-                for (laptop item : laptopSet) {
-                    System.out.println(item.brand);
-                }
+            } else {
+                // достали неверное значение, чтобы не висело
+                iScanner.next();
+                userInput = 200;
             }
+
+            
+            switch (userInput) {
+                case 0:
+                    break;
+                case 200:
+                    break;    
+                case 1:
+                    for (laptop item : laptopSet) {
+                        System.out.println(item);
+                    }
+                    break;
+                case 2:     
+                    findLaptopItem();
+                    break;
+                default:
+                    System.out.print("Неверный ввод типа операции, повторите:");
+            }
+        }
+        iScanner.close();
+    }
+
+    public static void findLaptopItem(){
+        
+        Scanner iScanner = new Scanner(System.in, "cp866");
+        
+        System.out.print("Начинаем искать! Выберите критерий поиска:");
+        
+        int userInput = 200;
+        while (userInput != 0) {
+            System.out.println("""
+                    \n1 - по производителю
+                    2 - по объему RAM
+                    3 - по объему SSD
+                    4 - по цвету
+                    0 - возврат в главное меню""");
+            
+            
+            System.out.print("Ваш выбор: ");
+            
+            if (iScanner.hasNextInt()) {
+                userInput = iScanner.nextInt();
+            } else {
+                // достали неверное значение, чтобы не висело
+                iScanner.next();
+                continue;
+            }
+            
+            switch (userInput) {
+                case 0:
+                    break;
+                case 1:
+                    System.out.print("Введите производителя: ");
+                    String choiceBrand = iScanner.next();
+                    printSearchResults(laptop.findBrand(laptopSet, choiceBrand.toUpperCase()));
+                    break;
+                case 2:
+                    System.out.print("Введите объем RAM: ");
+                    int choiceRam = iScanner.nextInt();
+                    printSearchResults(laptop.findRAM(laptopSet, choiceRam));
+                    break;
+                case 3:
+                    System.out.print("Введите объем SSD: ");
+                    int choiceSSD = iScanner.nextInt();
+                    printSearchResults(laptop.findSSD(laptopSet, choiceSSD));
+                    break;
+                case 4:
+                    System.out.print("Введите цвет: ");
+                    String choiceColor = iScanner.next();
+                    printSearchResults(laptop.findColor(laptopSet, choiceColor));
+                    break;    
+                default:
+                    System.out.print("Неверный ввод критерия поиска, повторите:");
+            }
+        }
+        iScanner.close();                    
+    }    
+
+    // вывод результатов поиска
+    public static void printSearchResults(List<laptop> printList){
+        if (printList.size() == 0) {
+            System.out.println("По Вашему запросу ничего не найдено...");
+            return;
+        }
+        for (laptop item : printList) {
+            System.out.println(item);
         }
     }
 }
